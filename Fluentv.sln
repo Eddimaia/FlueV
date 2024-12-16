@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11393483-90E7-480B-A96A-B022052BD2A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{D7AC73A8-5077-45CA-8B31-9E892D44FF1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5861A519-15E1-4392-BDE2-D13F01D08093}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentV.Core.Tests", "src\tests\FluentV.Core.Tests\FluentV.Core.Tests.csproj", "{8BDA7B49-E971-4642-8F5F-5832503EB8C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentV.Core", "src\core\FluentV.Core\FluentV.Core.csproj", "{2E83B967-8CBE-40DE-BFBB-B16498AE8F25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BDA7B49-E971-4642-8F5F-5832503EB8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BDA7B49-E971-4642-8F5F-5832503EB8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BDA7B49-E971-4642-8F5F-5832503EB8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BDA7B49-E971-4642-8F5F-5832503EB8C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E83B967-8CBE-40DE-BFBB-B16498AE8F25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E83B967-8CBE-40DE-BFBB-B16498AE8F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E83B967-8CBE-40DE-BFBB-B16498AE8F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E83B967-8CBE-40DE-BFBB-B16498AE8F25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7AC73A8-5077-45CA-8B31-9E892D44FF1D} = {11393483-90E7-480B-A96A-B022052BD2A3}
+		{5861A519-15E1-4392-BDE2-D13F01D08093} = {11393483-90E7-480B-A96A-B022052BD2A3}
+		{8BDA7B49-E971-4642-8F5F-5832503EB8C7} = {5861A519-15E1-4392-BDE2-D13F01D08093}
+		{2E83B967-8CBE-40DE-BFBB-B16498AE8F25} = {D7AC73A8-5077-45CA-8B31-9E892D44FF1D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AA99826-4BAA-4267-82EF-487AF3A88487}
+	EndGlobalSection
+EndGlobal
