@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    pull_request:
-      - main
 
 jobs:
   build:
@@ -32,4 +30,4 @@ jobs:
 
       # 5. Executar testes
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --verbosity normal
