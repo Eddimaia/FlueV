@@ -2,8 +2,9 @@
 public class SampleEntity
 {
     public object NoRule = null!;
+    public object Required = null!;
     public int MinusOne = -1;
     public string EmptyString = string.Empty;
-    public string BlankSpaceString = " ";
+    public string WhiteSpaceString = " ";
     public SampleEntity NullSampleEntity = null!;
 }
