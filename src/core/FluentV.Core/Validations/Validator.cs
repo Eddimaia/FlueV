@@ -1,11 +1,11 @@
 ﻿using FluentV.Core.Notifications;
-using FluentV.Core.Validations.Interfaces;
+using FluentV.Core.Notifications.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace FluentV.Core.Validations
 {
-    public class Validator<TNotification> : IValidator<TNotification> 
+    public class Validator<TNotification> : INotificator<TNotification> 
         where TNotification : DefaultNotification
     {
         private readonly List<TNotification> _notifications;

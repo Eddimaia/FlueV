@@ -1,6 +1,6 @@
 ﻿using FluentV.Core.Notifications;
+using FluentV.Core.Notifications.Interfaces;
 using FluentV.Core.Validations;
-using FluentV.Core.Validations.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace FluentV.Core.Exceptions
     /// Custom exception that encapsulates notifacations.
     /// </summary>
     /// <typeparam name="TNotification">Type of notification, must inherit <see cref="DefaultNotification"/>.</typeparam>
-    public class NotificationException<TNotification> : Exception, IValidator<TNotification>
+    public class NotificationException<TNotification> : Exception, INotificator<TNotification>
         where TNotification : DefaultNotification
     {
         private readonly Validator<TNotification> _validator;
