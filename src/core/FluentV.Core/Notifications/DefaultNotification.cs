@@ -19,5 +19,10 @@ namespace FluentV.Core.Notifications
         public string Message { get; private set; }
         public object Value { get; private set; }
         public List<string> AcceptedValues { get; private set; }
+
+        public override string ToString()
+        {
+            return $"The member '{PropertyName}' of {Assembly.FullName} don't accept '{Value}'{Environment.NewLine}Accepted Values: {string.Join(", ", AcceptedValues)}";
+        }
     }
 }
