@@ -16,7 +16,7 @@ namespace FluentV.Core.Validations
                 Message = message ?? $"'{_memberInFocus}' {DefaultMessage.WhiteSpace}"
             };
 
-            rule.AcceptedValues.Add("Value that are not white spaces");
+            rule.AcceptedValues.Add("Values that are not white spaces");
 
             _rules[_memberInFocus].Add(rule);
 
