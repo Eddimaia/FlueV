@@ -11,5 +11,8 @@ public class SampleContract : ValidationRules<SampleEntity>
 
         RequireRulesFor(x => x.WhiteSpaceString)
             .NotWhiteSpace();
+
+        RequireRulesFor(x => x.EmptyString)
+            .NotEmpty();
     }
 }

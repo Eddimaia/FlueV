@@ -7,9 +7,8 @@ namespace FluentV.Core.Validations
     {
         public ValidationRules<TEntity> NotWhiteSpace(string message = null)
         {
-            if (_memberInFocusType != typeof(string))
+            if ( _memberInFocusType != typeof(string) )
                 return this;
-
 
             var rule = new Rule
             {
@@ -17,6 +16,23 @@ namespace FluentV.Core.Validations
             };
 
             rule.AcceptedValues.Add("Values that are not white spaces");
+
+            _rules[_memberInFocus].Add(rule);
+
+            return this;
+        }
+
+        public ValidationRules<TEntity> NotEmpty(string message = null)
+        {
+            if ( _memberInFocusType != typeof(string) )
+                return this;
+
+            var rule = new Rule
+            {
+                Message = message ?? $"'{_memberInFocus}' {DefaultMessage.NotEmpty}"
+            };
+
+            rule.AcceptedValues.Add("Values that are not ''");
 
             _rules[_memberInFocus].Add(rule);
 
