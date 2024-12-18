@@ -1,4 +1,5 @@
 ﻿using FluentV.Core.Patterns;
+using FluentV.Core.Validations.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,7 +9,7 @@ namespace FluentV.Core.Validations
     public abstract partial class ValidationRules<TEntity> where TEntity : class
     {
         public Dictionary<string, List<Rule>> Rules => _rules;
-        public Dictionary<string, List<Rule>> _rules;
+        private Dictionary<string, List<Rule>> _rules;
 
         private string _memberInFocus;
         private Type _memberInFocusType;
@@ -63,11 +64,5 @@ namespace FluentV.Core.Validations
             return this;
         }
         #endregion
-
-        public class Rule
-        {
-            public string Message { get; set; }
-            public List<object> AcceptedValues { get; set; } = new List<object>();
-        }
     }
 }

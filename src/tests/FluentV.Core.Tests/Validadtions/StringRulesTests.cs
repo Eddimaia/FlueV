@@ -1,6 +1,7 @@
 ﻿using FluentV.Core.Patterns;
 using FluentV.Core.Tests.Samples.Contracts;
 using FluentV.Core.Tests.Samples.Entities;
+using FluentV.Core.Validations.Rules;
 
 namespace FluentV.Core.Tests.Validadtions;
 public class StringRulesTests

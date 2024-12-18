@@ -1,6 +1,5 @@
 ﻿using FluentV.Core.Notifications;
 using FluentV.Core.Notifications.Interfaces;
-using FluentV.Core.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +13,13 @@ namespace FluentV.Core.Exceptions
     public class NotificationException<TNotification> : Exception, INotificator<TNotification>
         where TNotification : DefaultNotification
     {
-        private readonly Validator<TNotification> _validator;
+        private readonly Notificator<TNotification> _validator;
         public new string Message { get; private set; } = "Some assembly has validation errors";
         public IReadOnlyCollection<TNotification> Notifications => _validator.Notifications;
 
         private NotificationException() : base()
         {
-            _validator = new Validator<TNotification>();
+            _validator = new Notificator<TNotification>();
         }
 
         /// <summary>

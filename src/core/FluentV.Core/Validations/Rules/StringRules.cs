@@ -1,5 +1,7 @@
 ﻿using FluentV.Core.Patterns;
+using FluentV.Core.Validations.Rules;
 using System;
+using System.Linq;
 
 namespace FluentV.Core.Validations
 {
@@ -8,7 +10,9 @@ namespace FluentV.Core.Validations
         public ValidationRules<TEntity> NotWhiteSpace(string message = null)
         {
             if ( _memberInFocusType != typeof(string) )
-                return this;
+            {
+                throw new InvalidOperationException($"The rule '{nameof(NotWhiteSpace)}' can only be applied to properties of type string.");
+            }
 
             var rule = new Rule
             {
@@ -25,7 +29,9 @@ namespace FluentV.Core.Validations
         public ValidationRules<TEntity> NotEmpty(string message = null)
         {
             if ( _memberInFocusType != typeof(string) )
-                return this;
+            {
+                throw new InvalidOperationException($"The rule '{nameof(NotEmpty)}' can only be applied to properties of type string.");
+            }
 
             var rule = new Rule
             {

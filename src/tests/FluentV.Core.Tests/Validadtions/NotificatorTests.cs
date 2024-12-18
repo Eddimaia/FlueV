@@ -1,12 +1,11 @@
 ﻿using FluentV.Core.Notifications;
-using FluentV.Core.Validations;
 
 namespace FluentV.Core.Tests.Validadtions;
 
 [Collection("Validator")]
-public class ValidatorTests
+public class NotificatorTests
 {
-    private readonly Validator<DefaultNotification> _validator = new();
+    private readonly Notificator<DefaultNotification> _validator = new();
 
     [Fact]
     public void Should_Create_One_Notification()
