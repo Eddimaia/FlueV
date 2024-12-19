@@ -1,7 +1,6 @@
 ﻿using FluentV.Core.Patterns;
 using FluentV.Core.Validations.Rules;
 using System;
-using System.Linq;
 
 namespace FluentV.Core.Validations
 {

@@ -11,7 +11,6 @@ public class NotificationExceptionTests
         var exception = new NotificationException<DefaultNotification>(assertNotification);
 
         Assert.Single(exception.Notifications);
-        Assert.Contains("'-1'", exception.Message);
         Assert.Contains("'Id'", exception.Message);
     }
 
@@ -52,7 +51,7 @@ public class NotificationExceptionTests
         public string Name { get; set; } = string.Empty;
     }
 
-    private class CustomNotification(Type assembly, string propertyName, string message, object value, List<string> acceptedValues, DateTime date)
+    private class CustomNotification(Type assembly, string propertyName, string message, object value, List<object> acceptedValues, DateTime date)
         : DefaultNotification(assembly, propertyName, message, value, acceptedValues)
     {
         public DateTime Date { get; private set; } = date;

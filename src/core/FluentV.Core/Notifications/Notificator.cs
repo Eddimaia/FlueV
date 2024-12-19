@@ -14,8 +14,11 @@ namespace FluentV.Core.Notifications
         public Notificator()
             => _notifications = new List<TNotification>();
 
-        private TNotification CreateInstance(Type assembly, string propertyName, string message, object value, List<string> acceptedValues)
+        private TNotification CreateInstance(Type assembly, string propertyName, string message, object value, List<object> acceptedValues)
             => Activator.CreateInstance(typeof(TNotification), assembly, propertyName, message, value, acceptedValues) as TNotification;
+
+        private TNotification CreateInstance(Type assembly, string propertyName, string message)
+            => Activator.CreateInstance(typeof(TNotification), assembly, propertyName, message) as TNotification;
 
         public void AddNotification(TNotification notification)
             => _notifications.Add(notification);
@@ -23,9 +26,15 @@ namespace FluentV.Core.Notifications
         public void AddNotifications(IEnumerable<TNotification> notifications)
             => _notifications.AddRange(notifications);
 
-        public void AddNotification(Type assembly, string propertyName, string message, object value, List<string> acceptedValues)
+        public void AddNotification(Type assembly, string propertyName, string message, object value, List<object> acceptedValues)
         {
             var notification = CreateInstance(assembly, propertyName, message, value, acceptedValues);
+            _notifications.Add(notification);
+        }
+
+        public void AddNotification(Type assembly, string propertyName, string message)
+        {
+            var notification = CreateInstance(assembly, propertyName, message);
             _notifications.Add(notification);
         }
     }

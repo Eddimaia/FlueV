@@ -1,13 +1,8 @@
 ﻿using FluentV.Core.Enums;
 using FluentV.Core.Notifications;
-using FluentV.Core.Notifications.Interfaces;
-using FluentV.Core.Validations.Rules;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace FluentV.Core.Validations
 {
@@ -25,7 +20,7 @@ namespace FluentV.Core.Validations
             _validationRules = validationRules;
         }
 
-        public Validator<TNotification, TEntity> ValidateString<TResult>(Expression<Func<TEntity, TResult>> propertyExpression, string value)
+        public Validator<TNotification, TEntity> Validate<TResult>(Expression<Func<TEntity, TResult>> propertyExpression, string value)
         {
             var propertyName = GetPropertyName(propertyExpression);
 
@@ -36,10 +31,31 @@ namespace FluentV.Core.Validations
                 if ( Validations.IsNull(value) )
                 {
                     _notificator
-                        .AddNotification(typeof(TEntity), propertyName, rule.Message, value, rule.AcceptedValues.Select(x => "'" + x + "'").ToList());
+                        .AddNotification(typeof(TEntity), propertyName, rule.Message);
                 }
 
             }
+
+            rule = rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotEmpty);
+            if(rule != null)
+            {
+                if (Validations.IsEmptyString(value))
+                {
+                    _notificator
+                        .AddNotification(typeof(TEntity), propertyName, rule.Message);
+                }
+            }
+
+            rule = rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotWhiteSpace);
+            if (rule != null)
+            {
+                if (Validations.IsWhiteSpaceString(value))
+                {
+                    _notificator
+                        .AddNotification(typeof(TEntity), propertyName, rule.Message);
+                }
+            }
+
             return this;
         }
 

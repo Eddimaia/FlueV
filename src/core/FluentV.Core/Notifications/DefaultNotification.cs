@@ -5,7 +5,14 @@ namespace FluentV.Core.Notifications
 {
     public class DefaultNotification
     {
-        public DefaultNotification(Type assembly, string propertyName, string message, object value, List<string> acceptedValues)
+        public DefaultNotification(Type assembly, string propertyName, string message)
+        {
+            Assembly = assembly;
+            PropertyName = propertyName;
+            Message = message;
+        }
+
+        public DefaultNotification(Type assembly, string propertyName, string message, object value, List<object> acceptedValues)
         {
             Assembly = assembly;
             PropertyName = propertyName;
@@ -18,11 +25,11 @@ namespace FluentV.Core.Notifications
         public string PropertyName { get; private set; }
         public string Message { get; private set; }
         public object Value { get; private set; }
-        public List<string> AcceptedValues { get; private set; }
+        public List<object> AcceptedValues { get; private set; }
 
         public override string ToString()
         {
-            return $"The member '{PropertyName}' of {Assembly.FullName} don't accept '{Value}'{Environment.NewLine}Accepted Values: {string.Join(", ", AcceptedValues)}";
+            return $"The member '{PropertyName}' of {Assembly.FullName} has validation errors.";
         }
     }
 }

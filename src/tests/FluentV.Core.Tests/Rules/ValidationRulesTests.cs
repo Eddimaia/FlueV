@@ -3,7 +3,7 @@ using FluentV.Core.Tests.Samples.Contracts;
 using FluentV.Core.Tests.Samples.Entities;
 using FluentV.Core.Validations;
 
-namespace FluentV.Core.Tests.Validadtions;
+namespace FluentV.Core.Tests.Rules;
 public class ValidationRulesTests
 {
     public SampleContract _contract = new SampleContract();

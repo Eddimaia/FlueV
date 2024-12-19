@@ -2,12 +2,12 @@
 {
     public static partial class Validations
     {
-        public static bool IsEmpty(this string value)
+        public static bool IsEmptyString(this string value)
         {
             return value == string.Empty;
         }
 
-        public static bool IsWhiteSpace(this string value)
+        public static bool IsWhiteSpaceString(this string value)
         {
             foreach ( char c in value )
             {

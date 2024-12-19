@@ -1,6 +1,6 @@
 ﻿using FluentV.Core.Notifications;
 
-namespace FluentV.Core.Tests.Validadtions;
+namespace FluentV.Core.Tests.Notifications;
 
 [Collection("Validator")]
 public class NotificatorTests
@@ -16,7 +16,6 @@ public class NotificatorTests
 
         Assert.False(_validator.IsValid);
         Assert.Single(_validator.Notifications);
-        Assert.Equal(-1, notification.Value);
         Assert.Equal("Not valid", notification.Message);
         Assert.Equal(typeof(MoqClass), notification.Assembly);
         Assert.Equal(nameof(MoqClass.Id), notification.PropertyName);
@@ -77,7 +76,7 @@ public class NotificatorTests
         public string Name { get; set; } = string.Empty;
     }
 
-    private class CustomNotification(Type assembly, string propertyName, string message, object value, List<string> acceptedValues, DateTime date)
+    private class CustomNotification(Type assembly, string propertyName, string message, object value, List<object> acceptedValues, DateTime date)
         : DefaultNotification(assembly, propertyName, message, value, acceptedValues)
     {
         public DateTime Date { get; private set; } = date;
