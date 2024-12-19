@@ -23,7 +23,7 @@ public class ValidationRulesTests
     [Fact]
     public void Required_Is_Required()
     {
-        Assert.Contains(DefaultMessage.Required, _contract.Rules[nameof(SampleEntity.Required)].First().Message);
+        Assert.Contains(DefaultMessage.Required,  _contract.Rules[nameof(SampleEntity.Required)].First().Message);
         Assert.Equal("Required", _contract.Rules[nameof(SampleEntity.Required)].First().AcceptedValues.First());
     }
 }
