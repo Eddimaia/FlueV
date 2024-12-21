@@ -1,8 +1,7 @@
 ﻿using FluentV.Core.Enums;
-using System;
 using System.Collections.Generic;
 
-namespace FluentV.Core.Validations.Rules
+namespace FluentV.Core.Rules
 {
     public class Rule
     {

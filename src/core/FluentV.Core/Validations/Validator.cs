@@ -1,6 +1,8 @@
 ﻿using FluentV.Core.Enums;
 using FluentV.Core.Notifications;
+using FluentV.Core.Rules;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -11,21 +13,22 @@ namespace FluentV.Core.Validations
         where TEntity : class
     {
         private readonly Notificator<TNotification> _notificator;
-        private readonly ValidationRules<TEntity> _validationRules;
+        private readonly RuleBuilder<TEntity> _validationRules;
+        private readonly List<Rule> _rules;
         public Notificator<TNotification> Notificator => _notificator;
 
-        public Validator(Notificator<TNotification> notificator, ValidationRules<TEntity> validationRules)
+        public Validator(Notificator<TNotification> notificator, RuleBuilder<TEntity> validationRules, List<Rule> rules)
         {
             _notificator = notificator;
             _validationRules = validationRules;
+            _rules = rules;
         }
 
-        public Validator<TNotification, TEntity> Validate<TResult>(Expression<Func<TEntity, TResult>> propertyExpression, string value)
+        public Validator<TNotification, TEntity> Validate<TResult>(Expression<Func<TEntity, TResult>> propertyExpression, object value)
         {
             var propertyName = GetPropertyName(propertyExpression);
 
-            var rules = _validationRules.Rules[propertyName];
-            var rule = rules.FirstOrDefault(x => x.ValidationType == EValidationType.Required);
+            var rule = _rules.FirstOrDefault(x => x.ValidationType == EValidationType.Required);
             if ( rule != null  )
             {
                 if ( Validations.IsNull(value) )
@@ -36,20 +39,20 @@ namespace FluentV.Core.Validations
 
             }
 
-            rule = rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotEmpty);
+            rule = _rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotEmpty);
             if(rule != null)
             {
-                if (Validations.IsEmptyString(value))
+                if (Validations.IsEmptyString(value.ToString()))
                 {
                     _notificator
                         .AddNotification(typeof(TEntity), propertyName, rule.Message);
                 }
             }
 
-            rule = rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotWhiteSpace);
+            rule = _rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotWhiteSpace);
             if (rule != null)
             {
-                if (Validations.IsWhiteSpaceString(value))
+                if (Validations.IsWhiteSpaceString(value.ToString()))
                 {
                     _notificator
                         .AddNotification(typeof(TEntity), propertyName, rule.Message);

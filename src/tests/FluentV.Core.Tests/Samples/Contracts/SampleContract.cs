@@ -1,18 +1,18 @@
-﻿using FluentV.Core.Tests.Samples.Entities;
-using FluentV.Core.Validations;
+﻿using FluentV.Core.Contract;
+using FluentV.Core.Tests.Samples.Entities;
 
 namespace FluentV.Core.Tests.Samples.Contracts;
-public class SampleContract : ValidationRules<SampleEntity>
+public class SampleContract : Contract<SampleEntity>
 {
     public SampleContract()
     {
-        RequireRulesFor(x => x.Required)
+        ApplyRulesFor(x => x.Required)
             .Required();
 
-        RequireRulesFor(x => x.WhiteSpaceString)
+        ApplyRulesFor(x => x.WhiteSpaceString)
             .NotWhiteSpace();
 
-        RequireRulesFor(x => x.EmptyString)
+        ApplyRulesFor(x => x.EmptyString)
             .NotEmpty();
     }
 }

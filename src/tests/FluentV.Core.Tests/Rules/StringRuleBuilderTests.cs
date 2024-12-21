@@ -1,10 +1,9 @@
 ﻿using FluentV.Core.Patterns;
 using FluentV.Core.Tests.Samples.Contracts;
 using FluentV.Core.Tests.Samples.Entities;
-using FluentV.Core.Validations.Rules;
 
 namespace FluentV.Core.Tests.Rules;
-public class StringRulesTests
+public class StringRuleBuilderTests
 {
     public SampleContract _contract = new SampleContract();
 
