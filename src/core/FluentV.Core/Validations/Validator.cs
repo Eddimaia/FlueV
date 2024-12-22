@@ -14,62 +14,86 @@ namespace FluentV.Core.Validations
     {
         private readonly Notificator<TNotification> _notificator;
         private readonly RuleBuilder<TEntity> _validationRules;
-        private readonly List<Rule> _rules;
+        private readonly Dictionary<string, RuleInfo> _rules;
         public Notificator<TNotification> Notificator => _notificator;
 
-        public Validator(Notificator<TNotification> notificator, RuleBuilder<TEntity> validationRules, List<Rule> rules)
+        public Validator(Notificator<TNotification> notificator, RuleBuilder<TEntity> validationRules)
         {
             _notificator = notificator;
             _validationRules = validationRules;
-            _rules = rules;
+            _rules = validationRules.Rules;
         }
 
-        public Validator<TNotification, TEntity> Validate<TResult>(Expression<Func<TEntity, TResult>> propertyExpression, object value)
+        public Validator<TNotification, TEntity> ValidateProperty<TResult>(Expression<Func<TEntity, TResult>> propertyExpression, object value)
         {
             var propertyName = GetPropertyName(propertyExpression);
+            return ValidateProperty(propertyName, value);
+        }
 
-            var rule = _rules.FirstOrDefault(x => x.ValidationType == EValidationType.Required);
-            if ( rule != null  )
+        public Validator<TNotification, TEntity> ValidateProperty(string propertyName, object value)
+        {
+            if (!_rules.TryGetValue(propertyName, out var propertyInfo))
             {
-                if ( Validations.IsNull(value) )
+                throw new ArgumentException($"There are no rules applied to property '{propertyName}'");
+            }
+
+            GeneralValidations(propertyName, propertyInfo.Rules, value);
+
+            if (propertyInfo.PropertyType == typeof(string))
+            {
+                StringValidations(propertyName, propertyInfo.Rules, value);
+            }
+            return this;
+        }
+
+        protected virtual void GeneralValidations(string propertyName, List<Rule> propertyRules, object value)
+        {
+            var rule = propertyRules.FirstOrDefault(x => x.Validation == EValidation.Required);
+            if (rule != null)
+            {
+                if (Validations.IsNull(value))
                 {
-                    _notificator
-                        .AddNotification(typeof(TEntity), propertyName, rule.Message);
+                    AddNotification(typeof(TEntity), propertyName, rule.Message);
                 }
 
             }
+        }
 
-            rule = _rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotEmpty);
-            if(rule != null)
+        protected virtual void StringValidations(string propertyName, List<Rule> propertyRules, object value)
+        {
+            var rule = propertyRules.FirstOrDefault(x => x.Validation == EValidation.NotEmpty);
+            if (rule != null)
             {
                 if (Validations.IsEmptyString(value.ToString()))
                 {
-                    _notificator
-                        .AddNotification(typeof(TEntity), propertyName, rule.Message);
+                    AddNotification(typeof(TEntity), propertyName, rule.Message);
                 }
             }
 
-            rule = _rules.FirstOrDefault(x => x.ValidationType == EValidationType.NotWhiteSpace);
+            rule = propertyRules.FirstOrDefault(x => x.Validation == EValidation.NotWhiteSpace);
             if (rule != null)
             {
                 if (Validations.IsWhiteSpaceString(value.ToString()))
                 {
-                    _notificator
-                        .AddNotification(typeof(TEntity), propertyName, rule.Message);
+                    AddNotification(typeof(TEntity), propertyName, rule.Message);
                 }
             }
+        }
 
-            return this;
+        protected virtual void AddNotification(Type assembly, string propertyName, string message)
+        {
+            _notificator.
+                AddNotification(assembly, propertyName, message);
         }
 
         private string GetPropertyName<TResult>(Expression<Func<TEntity, TResult>> propertyExpression)
         {
-            if ( propertyExpression.Body is MemberExpression memberExpression )
+            if (propertyExpression.Body is MemberExpression memberExpression)
             {
                 return memberExpression.Member.Name;
             }
 
-            if ( propertyExpression.Body is UnaryExpression unaryExpression && unaryExpression.Operand is MemberExpression operand )
+            if (propertyExpression.Body is UnaryExpression unaryExpression && unaryExpression.Operand is MemberExpression operand)
             {
                 return operand.Member.Name;
             }

@@ -9,7 +9,8 @@ namespace FluentV.Core.Contract
     public class Contract<TEntity> : IContract<TEntity> where TEntity : class
     {
         private readonly RuleBuilder<TEntity> _ruleBuilder;
-        public Dictionary<string, List<Rule>> Rules => _ruleBuilder.Rules;
+        public Dictionary<string, RuleInfo> Rules => _ruleBuilder.Rules;
+        public RuleBuilder<TEntity> RuleBuilder => _ruleBuilder;
         public Contract()
         {
             _ruleBuilder = new RuleBuilder<TEntity>();

@@ -14,5 +14,9 @@ public class SampleContract : Contract<SampleEntity>
 
         ApplyRulesFor(x => x.EmptyString)
             .NotEmpty();
+
+        ApplyRulesFor(x => x.MoreThanOneRule)
+            .NotWhiteSpace()
+            .Required();
     }
 }

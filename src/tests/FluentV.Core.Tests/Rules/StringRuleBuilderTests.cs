@@ -10,14 +10,14 @@ public class StringRuleBuilderTests
     [Fact]
     public void Not_White_Space()
     {
-        Assert.Contains(DefaultMessage.WhiteSpace, _contract.Rules[nameof(SampleEntity.WhiteSpaceString)].First().Message);
-        Assert.Equal("Values that are not white spaces", _contract.Rules[nameof(SampleEntity.WhiteSpaceString)].First().AcceptedValues.First());
+        Assert.Contains(DefaultMessage.WhiteSpace, _contract.Rules[nameof(SampleEntity.WhiteSpaceString)].Rules.First().Message);
+        Assert.Equal("Values that are not white spaces", _contract.Rules[nameof(SampleEntity.WhiteSpaceString)].Rules.First().AcceptedValues.First());
     }
 
     [Fact]
     public void Not_Empty_String()
     {
-        Assert.Contains(DefaultMessage.NotEmpty, _contract.Rules[nameof(SampleEntity.EmptyString)].First().Message);
-        Assert.Equal("Values that are not ''", _contract.Rules[nameof(SampleEntity.EmptyString)].First().AcceptedValues.First());
+        Assert.Contains(DefaultMessage.NotEmpty, _contract.Rules[nameof(SampleEntity.EmptyString)].Rules.First().Message);
+        Assert.Equal("Values that are not ''", _contract.Rules[nameof(SampleEntity.EmptyString)].Rules.First().AcceptedValues.First());
     }
 }

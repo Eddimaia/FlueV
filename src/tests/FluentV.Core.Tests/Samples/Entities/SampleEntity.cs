@@ -7,4 +7,6 @@ public class SampleEntity
     public string EmptyString = string.Empty;
     public string WhiteSpaceString = " ";
     public SampleEntity NullSampleEntity = null!;
+
+    public string MoreThanOneRule = null!;
 }

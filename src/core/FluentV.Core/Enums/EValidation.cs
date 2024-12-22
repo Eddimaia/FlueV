@@ -1,6 +1,6 @@
 ﻿namespace FluentV.Core.Enums
 {
-    public enum EValidationType
+    public enum EValidation
     {
        Required,
        NotEmpty,

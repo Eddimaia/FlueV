@@ -1,4 +1,5 @@
-﻿using FluentV.Core.Patterns;
+﻿using FluentV.Core.Enums;
+using FluentV.Core.Patterns;
 using System;
 
 namespace FluentV.Core.Rules
@@ -12,14 +13,11 @@ namespace FluentV.Core.Rules
                 throw new InvalidOperationException($"The rule '{nameof(NotWhiteSpace)}' can only be applied to properties of type string.");
             }
 
-            var rule = new Rule
-            {
-                Message = message ?? $"'{_propertyName}' {DefaultMessage.WhiteSpace}"
-            };
+            var rule = new Rule(message ?? GetDefaultMessage(_propertyName, DefaultMessage.WhiteSpace), EValidation.NotWhiteSpace);
 
             rule.AcceptedValues.Add("Values that are not white spaces");
 
-            _rules[_propertyName].Add(rule);
+            _rules[_propertyName].Rules.Add(rule);
 
             return this;
         }
@@ -31,14 +29,11 @@ namespace FluentV.Core.Rules
                 throw new InvalidOperationException($"The rule '{nameof(NotEmpty)}' can only be applied to properties of type string.");
             }
 
-            var rule = new Rule
-            {
-                Message = message ?? $"'{_propertyName}' {DefaultMessage.NotEmpty}"
-            };
+            var rule = new Rule(message ?? GetDefaultMessage(_propertyName, DefaultMessage.NotEmpty), EValidation.NotEmpty);
 
             rule.AcceptedValues.Add("Values that are not ''");
 
-            _rules[_propertyName].Add(rule);
+            _rules[_propertyName].Rules.Add(rule);
 
             return this;
         }

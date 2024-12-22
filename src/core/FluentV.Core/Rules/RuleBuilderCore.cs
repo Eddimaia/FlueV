@@ -7,15 +7,15 @@ namespace FluentV.Core.Rules
 {
     public abstract class RuleBuilder
     {
-        public Dictionary<string, List<Rule>> Rules => _rules;
-        protected readonly Dictionary<string, List<Rule>> _rules;
+        public Dictionary<string, RuleInfo> Rules => _rules;
+        protected readonly Dictionary<string, RuleInfo> _rules;
 
         protected string _propertyName;
         protected Type _property;
 
         protected RuleBuilder()
         {
-            _rules = new Dictionary<string, List<Rule>>();
+            _rules = new Dictionary<string, RuleInfo>();
         }
 
         protected virtual void ApplyFocus(string name, Type type)
@@ -38,7 +38,7 @@ namespace FluentV.Core.Rules
 
             if (!_rules.ContainsKey(_propertyName))
             {
-                _rules.Add(_propertyName, new List<Rule>());
+                _rules.Add(_propertyName, new RuleInfo(_property));
             }
         }
 
